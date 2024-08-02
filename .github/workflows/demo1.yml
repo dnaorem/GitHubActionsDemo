@@ -20,4 +20,4 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build and test with Maven
-        run: ./ConnectKafka/mvn --batch-mode package
+        run: mvn -f /ConnectKafka/pom.xml --batch-mode package
