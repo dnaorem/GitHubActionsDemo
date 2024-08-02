@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<style>
+			table, tr, th, td {
+			  border: 1px solid black;
+			  border-collapse: collapse;
+			  vertical-align: middle;
+			}
+		</style>
+	</head>
+	<body>
+		<table style="width:60%">
+			<tr>
+
+			    <th>Topic Name</th>
+			    <th>DEV Status</th> 
+				<th>SIT Status</th>
+				<th>UAT Status</th>
+				<th>PROD Status</th>
+			    <th>User Name</th>
+				<th>Action</th>
+				
+			 </tr>
+		<tr th:each="topic: ${topics}">
+			<form   action="/doCreate" method="post" id="form" th:object="${topic}">
+			    <td th:text="${topic.topicName}"/>
+				<input type="hidden" th:value="${topic.topicName}" name="topicName" />
+			    <td th:text="${topic.devStatus}"/>
+				<input type="hidden" th:value="${topic.devStatus}" name="devStatus" />
+				
+				<td th:text="${topic.sitStatus}"/>
+	
+				<input type="hidden" th:value="${topic.sitStatus}" name="sitStatus" />
+				<td th:text="${topic.uatStatus}"/>
+				<input type="hidden" th:value="${topic.uatStatus}" name="uatStatus" />
+				<td th:text="${topic.prodStatus}"/>
+				<input type="hidden" th:value="${topic.prodStatus}" name="prodStatus" />
+				<td th:text="${topic.userName}"/>
+				<input type="hidden" th:value="${topic.userName}" name="userName" />
+				<td th:if="${topic.devStatus == 'Pending' || topic.sitStatus == 'Pending' || topic.uatStatus == 'Pending' || topic.prodStatus == 'Pending'}">
+				<input type="submit" value="Approve">
+			</form>
+			</td>
+			<td th:unless="${topic.devStatus == 'Pending' || topic.sitStatus == 'Pending' || topic.uatStatus == 'Pending' || topic.prodStatus == 'Pending'}">
+				Complete
+			</td>
+			
+		</tr>
+		</table>
+		<th th:text="${result}"/>
+	</body>
+</html>

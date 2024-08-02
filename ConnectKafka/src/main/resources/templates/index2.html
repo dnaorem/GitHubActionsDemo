@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Topic</title>
+
+<style type="text/css">
+    label {
+        display: inline-block;
+        width: 200px;
+        margin: 5px;
+        text-align: left;
+    }
+    input[type=text], input[type=password], select {
+        display: inline-block;
+        width: 200px;
+    }
+    input[type=radio] {
+        margin-left: 45px;
+    }
+    input[type=checkbox] {
+        margin-right: 190px;
+    }  
+    button {
+        padding: 5px;
+        margin: 10px;
+    }
+</style>
+</head>
+<body>
+<div align="center">
+    <h1>Add Topic with Domain</h1>
+    <form action="#" th:action="@{/addTopic}" method="post" th:object="${topicDomain}">
+        <label>Domain:</label>
+		<select th:field="*{domain}">
+		    <option th:each="p : ${listProfession}" th:value="${p}" th:text="${p}" />
+			<option th:value="domain1" th:text="domain1" />
+			<option th:value="domain2" th:text="domain2" />
+			<option th:value="domain3" th:text="domain3" />
+		</select>
+		<br/>
+ 
+        <label>Sub-Domain:</label>
+		<select th:field="*{subdomain}">
+			<option th:value="subdomain1" th:text="subdomain1" />
+			<option th:value="subdomain2" th:text="subdomain2" />
+			<option th:value="subdomain3" th:text="subdomain3" />
+		</select>
+		<br/>
+ 
+        <label>Environment:</label>
+		<select th:field="*{environment}">
+			<option th:value="environment1" th:text="environment1" />
+			<option th:value="environment2" th:text="environment2" />
+			<option th:value="environment3" th:text="environment3" />
+		</select>
+		<br/>
+ 
+        <label>Topic Name:</label>
+        <input type="text" th:field="*{topicName}" />
+		<input type="hidden" th:value="${userName}" name="userName" />
+		<br/>
+        <input type="submit" value="Login">
+    </form>
+</div>
+</body>
+</html>
