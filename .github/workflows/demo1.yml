@@ -1,8 +1,23 @@
-name: hello-world
-'on': push
+name: Java CI with Maven
+
+on:
+  pull_request:
+    branches:
+      - development
+
 jobs:
-  my-job:
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: my-step
-        run: echo "Hello World123!"
+      - name: Check out the repository
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build and test with Maven
+        run: mvn --batch-mode package
