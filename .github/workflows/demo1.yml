@@ -3,7 +3,7 @@ name: Springboot CI with Maven
 on:
   pull_request:
     branches:
-      - development
+      - main
 
 jobs:
   build:
