@@ -1,15 +1,11 @@
 name: Springboot CI with Maven
-
-on:
+'on':
   push:
     branches:
       - main
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4
@@ -17,7 +13,11 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'temurin'
+          distribution: temurin
           cache: maven
       - name: Build and test with Maven
         run: mvn -f ./ConnectKafka/pom.xml -DskipTests --batch-mode package
+      - name: Run java
+        run: >-
+          java -jar
+          /home/runner/work/GitHubActionsDemo/GitHubActionsDemo/ConnectKafka/target/ConnectKafka-0.0.1-SNAPSHOT.jar
