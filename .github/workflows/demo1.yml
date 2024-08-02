@@ -1,5 +1,5 @@
 name: Springboot CI with Maven
-'on': workflow_dispatch
+'on': repository_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
