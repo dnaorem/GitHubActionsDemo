@@ -1,4 +1,4 @@
-name: Springboot CI with Maven
+name: Springboot CI with Maven in Test
 'on':
   push:
     branches:
