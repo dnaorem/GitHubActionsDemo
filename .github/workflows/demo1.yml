@@ -1,5 +1,8 @@
-name: Springboot CI with Maven
-'on': repository_dispatch
+name: Springboot CI with Maven in Test
+'on':
+  push:
+    branches:
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
