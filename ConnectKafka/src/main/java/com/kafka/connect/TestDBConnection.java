@@ -9,6 +9,7 @@ public class TestDBConnection {
 
 	public static void main(String args[]) {
 		try {
+			//  Test DB connection
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/topic", "root", "July12@2024");
 			System.out.println("DB connected!");
