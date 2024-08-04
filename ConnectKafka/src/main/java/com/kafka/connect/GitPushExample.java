@@ -10,9 +10,11 @@ import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.kafka.connect.model.KafkaConfig;
 
+@Component
 public class GitPushExample {
 
     private static final Logger logger = LoggerFactory.getLogger(GitPushExample.class);
@@ -22,9 +24,10 @@ public class GitPushExample {
    // private static final String PASSWORD = "DJFebruary@2022";
     
     @Autowired
-    private static KafkaConfig kafkaConfig;
+    KafkaConfig kafkaConfig;
 
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
+    public void commitGit() {
         try {
 
 

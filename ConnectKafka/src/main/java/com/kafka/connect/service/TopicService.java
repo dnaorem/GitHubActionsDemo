@@ -13,6 +13,7 @@ import org.apache.kafka.clients.admin.AdminClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kafka.connect.GitPushExample;
 import com.kafka.connect.model.TopicDetails;	
 
 @Service
@@ -20,6 +21,9 @@ public class TopicService {
 	
 	//@Autowired
 	//AdminClient adminClient;
+	
+	@Autowired
+	GitPushExample gitPushExample;
 
 	public List<TopicDetails> getAllTopics() {
 		System.out.println("################## Getting Topics");
@@ -84,7 +88,7 @@ public class TopicService {
 		try {
 
 			Statement stmt = conn.createStatement();
-			boolean result = stmt.execute("INSERT INTO Topics(Name,DEV_Status,SIT_Status,UAT_Status,PROD_Status,UserName) VALUES ('"+topicName+"', 'Pending','Pending','Pending','Pending', '"+userName+"');");
+			//boolean result = stmt.execute("INSERT INTO Topics(Name,DEV_Status,SIT_Status,UAT_Status,PROD_Status,UserName) VALUES ('"+topicName+"', 'Pending','Pending','Pending','Pending', '"+userName+"');");
 		} catch (Exception e){
 			System.out.println(e);
 		} finally {
@@ -94,6 +98,7 @@ public class TopicService {
 				e.printStackTrace();
 			}
 		}
+		gitPushExample.commitGit();
 		return "Topic added Successfully!";
 	}
 	
