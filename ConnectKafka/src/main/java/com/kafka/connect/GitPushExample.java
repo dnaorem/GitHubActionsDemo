@@ -9,6 +9,9 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.kafka.connect.model.KafkaConfig;
 
 public class GitPushExample {
 
@@ -16,7 +19,10 @@ public class GitPushExample {
     private static final String REMOTE_URL = "https://github.com/dnaorem/GitHubActionsDemo.git";
     private static final String LOCAL_REPO_PATH = "D:\\Git\\";
     private static final String USERNAME = "dnaorem";
-    private static final String PASSWORD = "DJFebruary@2022";
+   // private static final String PASSWORD = "DJFebruary@2022";
+    
+    @Autowired
+    private static KafkaConfig kafkaConfig;
 
     public static void main(String[] args) {
         try {
@@ -35,7 +41,7 @@ public class GitPushExample {
 
             // Push changes to the remote repository
             git.push()
-                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("dnaorem", "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"))
+                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("dnaorem", kafkaConfig.getToken()))
                     .call();
 
             System.out.println("Changes pushed to remote repository successfully!");
