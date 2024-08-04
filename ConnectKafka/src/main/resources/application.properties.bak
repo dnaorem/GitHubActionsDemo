@@ -1,0 +1,14 @@
+#Sun Aug 04 18:57:18 IST 2024
+acks=all
+bootstrap.servers=pkc-56d1g.eastus.azure.confluent.cloud\:9092
+client.dns.lookup=use_all_dns_ips
+kafka.topic.name=value111
+kafka.topic.partitions=2
+kafka.topic.replicationFactor=3
+sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username\='PT4NDUNQCD44OUMM' password\='rK3pBWmFIS4mZdYEVkRD2xQX/ZKfj1Isi5BYPwqmhIYH8yv5IbWss4v84yUl4VQn';
+sasl.mechanism=PLAIN
+security.protocol=SASL_SSL
+session.timeout.ms=45000
+spring.application.name=ConnectKafka
+
+# Changed123
