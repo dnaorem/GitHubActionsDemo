@@ -4,6 +4,7 @@ import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.core.KafkaAdmin;
@@ -25,6 +26,9 @@ public class AdminConfigurer {
 	
 	@Autowired
 	GitPushExample gitPushExample;
+	
+	@Value(value = "${review.status}")
+	String reviewStatus;
 
 	public void getServer() {
 		System.out.println("========== " + kafkaConfig.getBootstrapServers());
@@ -55,6 +59,7 @@ public class AdminConfigurer {
 			// ############################# TO BE CHANGED, Just for Test
 			adminClient = AdminClient.create(configs);
 			ListTopicsResult topics = adminClient.listTopics();
+			System.out.println("#################### reviewStatus: " + reviewStatus);
 			try {
 				topics.names().get().forEach(System.out::println);
 			} catch (InterruptedException e) {
