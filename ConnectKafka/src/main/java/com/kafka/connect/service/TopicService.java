@@ -79,7 +79,7 @@ public class TopicService {
 	    	return "Topic could not be created in Confluent Kafka!";
 	}
 
-	public String addTopic(String topicName, String userName) throws InterruptedException, ExecutionException {
+	public String addTopic(String topicName, String userName, String token) throws InterruptedException, ExecutionException {
 		
 		if(topicAlreadyAdded(topicName)) {
 			return "Topic Already Added!";
@@ -98,7 +98,7 @@ public class TopicService {
 				e.printStackTrace();
 			}
 		}
-		gitPushExample.commitGit();
+		gitPushExample.commitGit(token);
 		return "Topic added Successfully!";
 	}
 	
