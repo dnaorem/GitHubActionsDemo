@@ -64,7 +64,7 @@ public class AdminConfigurer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			gitPushExample.commitGit();
+	//		gitPushExample.commitGit();
 			// ###############################################
 		return configs;
 	}

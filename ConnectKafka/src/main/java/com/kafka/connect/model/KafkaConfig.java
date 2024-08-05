@@ -27,8 +27,6 @@ public class KafkaConfig {
 	@Value(value = "${acks}")
 	private String acks;
 
-	@Value(value = "${github.client.token}")
-	private String token;
 	/*
 	 * @Value(value = "${client.name.server}") private String clientServer;
 	 */
@@ -89,13 +87,6 @@ public class KafkaConfig {
 		this.acks = acks;
 	}
 
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
 
 	/*
 	 * public String getClientServer() { return clientServer; }
