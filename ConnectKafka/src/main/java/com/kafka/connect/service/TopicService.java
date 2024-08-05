@@ -1,11 +1,18 @@
 package com.kafka.connect.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
@@ -13,6 +20,9 @@ import org.apache.kafka.clients.admin.AdminClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.io.FileWriteMode;
+import com.google.common.io.Files;
+import com.kafka.connect.GitPushExample;
 import com.kafka.connect.model.TopicDetails;	
 
 @Service
@@ -20,6 +30,9 @@ public class TopicService {
 	
 	//@Autowired
 	//AdminClient adminClient;
+	
+	@Autowired
+	GitPushExample gitPushExample;
 
 	public List<TopicDetails> getAllTopics() {
 		System.out.println("################## Getting Topics");
@@ -75,7 +88,7 @@ public class TopicService {
 	    	return "Topic could not be created in Confluent Kafka!";
 	}
 
-	public String addTopic(String topicName, String userName) throws InterruptedException, ExecutionException {
+	public String addTopic(String topicName, String userName, String token) throws InterruptedException, ExecutionException {
 		
 		if(topicAlreadyAdded(topicName)) {
 			return "Topic Already Added!";
@@ -84,7 +97,30 @@ public class TopicService {
 		try {
 
 			Statement stmt = conn.createStatement();
-			boolean result = stmt.execute("INSERT INTO Topics(Name,DEV_Status,SIT_Status,UAT_Status,PROD_Status,UserName) VALUES ('"+topicName+"', 'Pending','Pending','Pending','Pending', '"+userName+"');");
+			//boolean result = stmt.execute("INSERT INTO Topics(Name,DEV_Status,SIT_Status,UAT_Status,PROD_Status,UserName) VALUES ('"+topicName+"', 'Pending','Pending','Pending','Pending', '"+userName+"');");
+	
+	/*		File propertiesDir = new File("src\\main\\resources");
+			File fileInDevelop = Arrays.stream(propertiesDir.listFiles())
+					.filter(f -> f.getName().contains("application.properties"))
+					.findFirst()
+					.get();
+			Files.asCharSink(fileInDevelop, Charset.defaultCharset(), FileWriteMode.APPEND).write("\n\nkafka.topic.name=" + topicName);
+	*/
+			
+			File f1 = new File("src\\main\\resources\\application.properties");
+		    FileInputStream in = new FileInputStream(f1);
+		    Properties config = new Properties();
+		    config.load(in);
+
+		    config.setProperty("kafka.topic.name",topicName);
+
+		    // get or create the file
+		    File f2 = new File("src\\main\\resources\\application.properties");
+		    OutputStream out = new FileOutputStream(f2);
+		    config.store(out, "App properties file comment");
+			
+			
+			gitPushExample.commitGit(token);
 		} catch (Exception e){
 			System.out.println(e);
 		} finally {

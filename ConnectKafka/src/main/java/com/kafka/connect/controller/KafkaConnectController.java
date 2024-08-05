@@ -54,11 +54,11 @@ public class KafkaConnectController {
 
 	
 	@PostMapping("/addTopic")
-	public String addTopic(@ModelAttribute("topicDomain") TopicDomain topicDomain, @RequestParam("userName") String userName, Model model) throws Exception {
+	public String addTopic(@ModelAttribute("topicDomain") TopicDomain topicDomain, @RequestParam("userName") String userName, @RequestParam("token") String token, Model model) throws Exception {
 		
 		String finalTopicName = topicDomain.getDomain() + "." +topicDomain.getSubdomain()+ "." +topicDomain.getEnvironment()+ "." +topicDomain.getTopicName();
 		System.out.println("################# Topic: " + finalTopicName);
-		model.addAttribute("result", topicService.addTopic(finalTopicName, userName));
+		model.addAttribute("result", topicService.addTopic(finalTopicName, userName, token));
 		model.addAttribute("userName", userName);
 		return "create";
 	}

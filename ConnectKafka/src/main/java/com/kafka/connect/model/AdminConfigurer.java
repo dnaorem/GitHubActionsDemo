@@ -9,6 +9,8 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.stereotype.Component;
 
+import com.kafka.connect.GitPushExample;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -20,6 +22,9 @@ public class AdminConfigurer {
 	@Autowired
 	private KafkaConfig kafkaConfig;
 	AdminClient adminClient;
+	
+	@Autowired
+	GitPushExample gitPushExample;
 
 	public void getServer() {
 		System.out.println("========== " + kafkaConfig.getBootstrapServers());
@@ -59,6 +64,7 @@ public class AdminConfigurer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	//		gitPushExample.commitGit();
 			// ###############################################
 		return configs;
 	}
