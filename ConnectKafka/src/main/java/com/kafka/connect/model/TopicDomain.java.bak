@@ -8,8 +8,6 @@ public class TopicDomain {
     private String subdomain;
     private String environment;
     private String topicName;
-	private String token;
-	
 	public String getDomain() {
 		return domain;
 	}
@@ -34,16 +32,10 @@ public class TopicDomain {
 	public void setTopicName(String topicName) {
 		this.topicName = topicName;
 	}
-	public String getToken() {
-		return token;
-	}
-	public void setToken(String token) {
-		this.token = token;
-	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(domain, environment, subdomain, topicName, token);
+		return Objects.hash(domain, environment, subdomain, topicName);
 	}
 	
 	@Override
@@ -56,13 +48,13 @@ public class TopicDomain {
 			return false;
 		TopicDomain other = (TopicDomain) obj;
 		return Objects.equals(domain, other.domain) && Objects.equals(environment, other.environment)
-				&& Objects.equals(subdomain, other.subdomain) && Objects.equals(topicName, other.topicName) && Objects.equals(token, other.token);
+				&& Objects.equals(subdomain, other.subdomain) && Objects.equals(topicName, other.topicName);
 	}
 	
 	@Override
 	public String toString() {
 		return "UserDetails [domain=" + domain + ", subdomain=" + subdomain + ", environment=" + environment
-				+ ", topicName=" + topicName + ", token=" + token + "]";
+				+ ", topicName=" + topicName + "]";
 	}
 
     
