@@ -86,7 +86,7 @@ public class GitPushExample {
             }
             int responseCode = connection.getResponseCode();
 
-            if (responseCode == HttpURLConnection.HTTP_OK) {
+            if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
                 StringBuilder response = new StringBuilder();
 
                 try (
