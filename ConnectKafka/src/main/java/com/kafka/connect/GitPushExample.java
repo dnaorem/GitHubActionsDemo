@@ -27,7 +27,7 @@ public class GitPushExample {
     KafkaConfig kafkaConfig;
 
     //public static void main(String[] args) {
-    public void commitGit() {
+    public void commitGit(String token) {
         try {
 
 
@@ -44,7 +44,7 @@ public class GitPushExample {
 
             // Push changes to the remote repository
             git.push()
-                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("dnaorem", kafkaConfig.getToken()))
+                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("dnaorem", token))
                     .call();
 
             System.out.println("Changes pushed to remote repository successfully!");
