@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.io.FileWriteMode;
 import com.google.common.io.Files;
-import com.kafka.connect.GitPushExample;
+import com.kafka.connect.GitPushAndPullRequest;
 import com.kafka.connect.model.TopicDetails;	
 
 @Service
@@ -32,7 +32,7 @@ public class TopicService {
 	//AdminClient adminClient;
 	
 	@Autowired
-	GitPushExample gitPushExample;
+	GitPushAndPullRequest gitPushExample;
 
 	public List<TopicDetails> getAllTopics() {
 		System.out.println("################## Getting Topics");
