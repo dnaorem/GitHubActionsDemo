@@ -27,9 +27,7 @@ public class AdminConfigurer {
 	private KafkaConfig kafkaConfig;
 	AdminClient adminClient;
 	
-	//@Autowired
-	//GitPushAndPullRequest gitPushExample;
-	
+
 	@Value(value = "${review.status}")
 	String reviewStatus;
 
@@ -60,7 +58,7 @@ public class AdminConfigurer {
 		try {
 			Set<String> topics = adminClient.listTopics().names().get();
 		    if(topics.contains(kafkaConfig.getKafkaTopicName())) {
-		    	System.out.println("Topic " + kafkaConfig.getKafkaTopicName() + "already created!");
+		    	System.out.println("Topic '" + kafkaConfig.getKafkaTopicName() + "' already created!");
 		    } else {
 	
 			    NewTopic newTopic = new NewTopic(kafkaConfig.getKafkaTopicName(), kafkaConfig.getKafkaTopicPartitions(), kafkaConfig.getKafkaTopicReplicationFactor());
@@ -69,22 +67,33 @@ public class AdminConfigurer {
 				  .values().get(kafkaConfig.getKafkaTopicName()) .get();
 		   
 			    System.out.println("#################### Topic: " + kafkaConfig.getKafkaTopicName() + " created successfully!");
-			    topics = adminClient.listTopics().names().get();
-				topics.forEach(System.out::println);
+		//	    topics = adminClient.listTopics().names().get();
+		//		topics.forEach(System.out::println);
 				
 			}
 	    } catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	public boolean topicAlreadyExists() {
+		try {
+			Set<String> topics = adminClient.listTopics().names().get();
+		    if(topics.contains(kafkaConfig.getKafkaTopicName())) {
+		    	return true;
+		    }
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	/*
 	 * @Bean public AdminClient getClient() { return
 	 * AdminClient.create(kafkaAdminProperties()); }
 	 */
+	 
 
 }
