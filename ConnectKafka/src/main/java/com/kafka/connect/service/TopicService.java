@@ -91,7 +91,7 @@ public class TopicService {
 
 	public String addTopic(String topicName, String userName, String token) throws InterruptedException, ExecutionException {
 		
-		if(adminConfigurer.topicAlreadyExists()) {
+		if(adminConfigurer.topicAlreadyExists(topicName)) {
 			System.out.println("Topic '" + topicName + "' already created!");
 			return "Topic '" + topicName + "' already created!";
 		}

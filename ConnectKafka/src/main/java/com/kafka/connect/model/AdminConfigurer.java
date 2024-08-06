@@ -25,15 +25,11 @@ public class AdminConfigurer {
 
 	@Autowired
 	private KafkaConfig kafkaConfig;
+	
 	AdminClient adminClient;
 	
-
 	@Value(value = "${review.status}")
 	String reviewStatus;
-
-	public void getServer() {
-		System.out.println("========== " + kafkaConfig.getBootstrapServers());
-	}
 
 	@Bean
 	public Map<String, Object> kafkaAdminProperties() {
@@ -49,7 +45,6 @@ public class AdminConfigurer {
 			if(reviewStatus.equals("Approved")) {
 				createTopic(configs);
 			}
-
 		return configs;
 	}
 	
@@ -78,10 +73,11 @@ public class AdminConfigurer {
 		}
 	}
 
-	public boolean topicAlreadyExists() {
+	public boolean topicAlreadyExists(String topicName) {
 		try {
+			adminClient = AdminClient.create(kafkaAdminProperties());
 			Set<String> topics = adminClient.listTopics().names().get();
-		    if(topics.contains(kafkaConfig.getKafkaTopicName())) {
+		    if(topics.contains(topicName)) {
 		    	return true;
 		    }
 		}catch(Exception e) {
