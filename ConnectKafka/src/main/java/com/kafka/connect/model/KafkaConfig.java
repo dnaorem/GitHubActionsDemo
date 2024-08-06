@@ -26,7 +26,30 @@ public class KafkaConfig {
 
 	@Value(value = "${acks}")
 	private String acks;
+	
+	@Value(value = "${local.repo.path}")
+    private String localRepoPath;
+	
+	@Value(value = "${github.user}")
+    private String githubUser;
+	
+	@Value(value = "${github.branch.name}")
+    private String githubBranchName;
+	
+	@Value(value = "${github.remote.url}")
+    private String githubRemoteUrl;
+	
+	@Value(value = "${github.pull.request.url}")
+    private String pullRequestUrl;
 
+	@Value(value = "${kafka.topic.name}")
+    private String kafkaTopicName;
+	
+	@Value(value = "${kafka.topic.partitions}")
+    private int kafkaTopicPartitions;
+	
+	@Value(value = "${kafka.topic.replicationFactor}")
+    private short kafkaTopicReplicationFactor;
 	/*
 	 * @Value(value = "${client.name.server}") private String clientServer;
 	 */
@@ -87,6 +110,73 @@ public class KafkaConfig {
 		this.acks = acks;
 	}
 
+	public String getLocalRepoPath() {
+		return localRepoPath;
+	}
+
+	public void setLocalRepoPath(String localRepoPath) {
+		this.localRepoPath = localRepoPath;
+	}
+
+	public String getGithubUser() {
+		return githubUser;
+	}
+
+	public void setGithubUser(String githubUser) {
+		this.githubUser = githubUser;
+	}
+
+	public String getGithubBranchName() {
+		return githubBranchName;
+	}
+
+	public void setGithubBranchName(String githubBranchName) {
+		this.githubBranchName = githubBranchName;
+	}
+
+	public String getGithubRemoteUrl() {
+		return githubRemoteUrl;
+	}
+
+	public void setGithubRemoteUrl(String githubRemoteUrl) {
+		this.githubRemoteUrl = githubRemoteUrl;
+	}
+
+	public String getPullRequestUrl() {
+		return pullRequestUrl;
+	}
+
+	public void setPullRequestUrl(String pullRequestUrl) {
+		this.pullRequestUrl = pullRequestUrl;
+	}
+
+	public String getKafkaTopicName() {
+		return kafkaTopicName;
+	}
+
+	public void setKafkaTopicName(String kafkaTopicName) {
+		this.kafkaTopicName = kafkaTopicName;
+	}
+
+	public int getKafkaTopicPartitions() {
+		return kafkaTopicPartitions;
+	}
+
+	public void setKafkaTopicPartitions(int kafkaTopicPartitions) {
+		this.kafkaTopicPartitions = kafkaTopicPartitions;
+	}
+
+	public short getKafkaTopicReplicationFactor() {
+		return kafkaTopicReplicationFactor;
+	}
+
+	public void setKafkaTopicReplicationFactor(short kafkaTopicReplicationFactor) {
+		this.kafkaTopicReplicationFactor = kafkaTopicReplicationFactor;
+	}
+
+
+
+	
 
 	/*
 	 * public String getClientServer() { return clientServer; }
