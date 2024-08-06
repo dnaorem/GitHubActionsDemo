@@ -19,5 +19,5 @@ jobs:
         run: mvn -f ./ConnectKafka/pom.xml -DskipTests --batch-mode package
       - name: Run java
         run: >-
-          java -Dspring.main.web-application-type=NONE -Dreview.status=Approved -jar
+          java -Dspring.main.web-application-type=none -Dreview.status=Approved -jar
           /home/runner/work/GitHubActionsDemo/GitHubActionsDemo/ConnectKafka/target/ConnectKafka-0.0.1-SNAPSHOT.jar
