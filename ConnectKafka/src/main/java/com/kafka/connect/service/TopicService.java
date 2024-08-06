@@ -23,13 +23,14 @@ import org.springframework.stereotype.Service;
 import com.google.common.io.FileWriteMode;
 import com.google.common.io.Files;
 import com.kafka.connect.GitPushAndPullRequest;
+import com.kafka.connect.model.AdminConfigurer;
 import com.kafka.connect.model.TopicDetails;	
 
 @Service
 public class TopicService {
 	
-	//@Autowired
-	//AdminClient adminClient;
+	@Autowired
+	AdminConfigurer adminConfigurer;
 	
 	@Autowired
 	GitPushAndPullRequest gitPushExample;
@@ -90,13 +91,14 @@ public class TopicService {
 
 	public String addTopic(String topicName, String userName, String token) throws InterruptedException, ExecutionException {
 		
-		if(topicAlreadyAdded(topicName)) {
-			return "Topic Already Added!";
+		if(adminConfigurer.topicAlreadyExists(topicName)) {
+			System.out.println("Topic '" + topicName + "' already created!");
+			return "Topic '" + topicName + "' already created!";
 		}
-		Connection conn = DBConnection.getConnection();
+	//	Connection conn = DBConnection.getConnection();
 		try {
 
-			Statement stmt = conn.createStatement();
+		//	Statement stmt = conn.createStatement();
 			//boolean result = stmt.execute("INSERT INTO Topics(Name,DEV_Status,SIT_Status,UAT_Status,PROD_Status,UserName) VALUES ('"+topicName+"', 'Pending','Pending','Pending','Pending', '"+userName+"');");
 	
 	/*		File propertiesDir = new File("src\\main\\resources");
@@ -106,6 +108,7 @@ public class TopicService {
 					.get();
 			Files.asCharSink(fileInDevelop, Charset.defaultCharset(), FileWriteMode.APPEND).write("\n\nkafka.topic.name=" + topicName);
 	*/
+			
 			
 			File f1 = new File("src\\main\\resources\\application.properties");
 		    FileInputStream in = new FileInputStream(f1);
@@ -123,12 +126,6 @@ public class TopicService {
 			gitPushExample.commitGit(token);
 		} catch (Exception e){
 			System.out.println(e);
-		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
 		return "Topic added Successfully!";
 	}

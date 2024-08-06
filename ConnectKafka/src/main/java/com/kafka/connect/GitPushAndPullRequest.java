@@ -95,9 +95,10 @@ public class GitPushAndPullRequest {
             }
             else {
                 System.out.println("Error: HTTP Response code - " + responseCode);
+                throw new RuntimeException();
             }
     	} catch (Exception e) {
-    		
+    		e.printStackTrace();
     	} finally {
     		if (connection != null) {
     			connection.disconnect();
