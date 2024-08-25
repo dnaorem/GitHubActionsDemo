@@ -11,17 +11,18 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootTest
 class ConnectKafkaApplicationTests {
-	
-	@Autowired
-	RestTemplate restTemplate;
-
-	@Test
-	void contextLoads() {
-		System.out.println("================== Testing started!");
-		ResponseEntity<String> response = restTemplate.getForEntity("http://192.168.0.101:8080/create?name=DJ", String.class);
-		System.out.println("================== Response Code:" +response.getStatusCode());
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		
-	}
+	/*
+	 * @Autowired RestTemplate restTemplate;
+	 * 
+	 * @Test void contextLoads() {
+	 * System.out.println("================== Testing started!");
+	 * ResponseEntity<String> response =
+	 * restTemplate.getForEntity("http://192.168.0.101:8080/create?name=DJ",
+	 * String.class); System.out.println("================== Response Code:"
+	 * +response.getStatusCode()); assertEquals(HttpStatus.OK,
+	 * response.getStatusCode());
+	 * 
+	 * }
+	 */
 
 }

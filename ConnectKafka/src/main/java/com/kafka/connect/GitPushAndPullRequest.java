@@ -33,7 +33,7 @@ public class GitPushAndPullRequest {
     public void commitGit(String token) {
         try {
 
-
+        	 
             // Open the local repository
             File repoDir = new File(kafkaConfig.getLocalRepoPath());
             Git git = Git.open(repoDir);
@@ -43,7 +43,7 @@ public class GitPushAndPullRequest {
             git.add().addFilepattern(".").call();
 
             // Commit changes
-            git.commit().setMessage("Prop file changed").call();
+            git.commit().setMessage("Properties file changed").call();
 
             // Push changes to the remote repository
             git.push()
@@ -52,8 +52,8 @@ public class GitPushAndPullRequest {
 
             System.out.println("Changes pushed to remote repository successfully!");
             
-            createPullRequest(token);
-            System.out.println("Pull Request created successfully for reviewer!");
+       //     createPullRequest(token);
+       //     System.out.println("Pull Request created successfully for reviewer!");
 
         } catch (IOException e) {
             logger.error("IOException occurred: ", e);
@@ -76,7 +76,7 @@ public class GitPushAndPullRequest {
             connection.setRequestProperty("X-GitHub-Api-Version", "2022-11-28");
     		
             try (DataOutputStream os = new DataOutputStream(connection.getOutputStream())) {
-                os.writeBytes("{\"title\":\"New Topic Added by Developer\",\"body\":\"Please pull these new changes in!\",\"head\":\""+kafkaConfig.getGithubUser()+":"+kafkaConfig.getGithubBranchName()+"\",\"base\":\"main\"}");
+                os.writeBytes("{\"title\":\"New Topic Added by Developer\",\"body\":\"Please pull the new changes in!\",\"head\":\""+kafkaConfig.getGithubUser()+":"+kafkaConfig.getGithubBranchName()+"\",\"base\":\"main\"}");
                 os.flush();
             }
             int responseCode = connection.getResponseCode();
