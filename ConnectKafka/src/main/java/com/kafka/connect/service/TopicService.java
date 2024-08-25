@@ -109,8 +109,7 @@ public class TopicService {
 			Files.asCharSink(fileInDevelop, Charset.defaultCharset(), FileWriteMode.APPEND).write("\n\nkafka.topic.name=" + topicName);
 	*/
 			
-			
-			File f1 = new File("src\\main\\resources\\application.properties");
+			File f1 = new File(".\\git\\ConnectKafka\\src\\main\\resources\\application.properties");
 		    FileInputStream in = new FileInputStream(f1);
 		    Properties config = new Properties();
 		    config.load(in);
@@ -118,8 +117,8 @@ public class TopicService {
 		    config.setProperty("kafka.topic.name",topicName);
 
 		    // get or create the file
-		    File f2 = new File("src\\main\\resources\\application.properties");
-		    OutputStream out = new FileOutputStream(f2);
+		 //   File f2 = new File("src\\main\\resources\\application.properties");
+		    OutputStream out = new FileOutputStream(f1);
 		    config.store(out, "App properties file comment");
 			
 			

@@ -19,5 +19,10 @@ public class ConnectKafkaApplication {
 	public RestTemplate restTemplate() {
 	    return new RestTemplate();
 	}	
+	
+	@Bean(name = "cloneRepo", initMethod = "fetchGitFile")
+    public CloneRepo getCloneRepo(){
+        return new CloneRepo();
+    }
 
 }
